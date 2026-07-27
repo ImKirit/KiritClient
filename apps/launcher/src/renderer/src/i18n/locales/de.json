@@ -1,0 +1,51 @@
+{
+  "app": {
+    "name": "KiritClient"
+  },
+  "titlebar": {
+    "minimize": "Minimieren",
+    "maximize": "Maximieren",
+    "restore": "Wiederherstellen",
+    "close": "Schließen"
+  },
+  "nav": {
+    "instances": "Instanzen",
+    "cosmetics": "Cosmetics",
+    "settings": "Einstellungen"
+  },
+  "account": {
+    "signedOut": "Nicht angemeldet",
+    "signIn": "Anmelden",
+    "switch": "Account wechseln",
+    "manage": "Accounts verwalten",
+    "add": "Account hinzufügen"
+  },
+  "instances": {
+    "title": "Instanzen",
+    "subtitle": "Deine Minecraft-Versionen und Modpacks",
+    "create": "Neue Instanz",
+    "empty": "Noch keine Instanzen"
+  },
+  "cosmetics": {
+    "title": "Cosmetics",
+    "subtitle": "Capes und Skins"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "subtitle": "KiritClient konfigurieren",
+    "language": "Sprache",
+    "languageHint": "Sprache der Oberfläche. Ein Neustart ist nicht nötig.",
+    "instanceLocation": "Speicherort für Instanzen",
+    "instanceLocationHint": "Wo neue Instanzen standardmäßig abgelegt werden."
+  },
+  "update": {
+    "available": "Version {{version}} ist verfügbar",
+    "download": "Jetzt aktualisieren",
+    "dismiss": "Später"
+  },
+  "common": {
+    "notBuiltYet": "Noch nicht gebaut",
+    "notBuiltYetHint": "Dieser Bereich gehört zum Grundgerüst und hat noch keine Funktion. Er wird Feature für Feature aufgebaut.",
+    "kiritclient": "KiritClient"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "kiritclient",
+  "version": "0.0.0",
+  "private": true,
+  "description": "KiritClient — a clean, modern Minecraft launcher",
+  "license": "UNLICENSED",
+  "author": "Kirit",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=@kiritclient/launcher",
+    "build": "npm run build --workspace=@kiritclient/launcher",
+    "typecheck": "npm run typecheck --workspace=@kiritclient/launcher",
+    "package": "npm run package --workspace=@kiritclient/launcher"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

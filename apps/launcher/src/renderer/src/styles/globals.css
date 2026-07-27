@@ -1,0 +1,232 @@
+@import 'tailwindcss';
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   KiritClient — Designsystem
+   Farben und Tag-Muster stammen aus imkirit.dev/upload (Owner-Referenz).
+   Verbindliche Regel: border-radius ist ÜBERALL 0. Siehe Vault-Note
+   "Designsystem & visuelle Sprache".
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@theme {
+  /* ── Flächen ── */
+  --color-bg0: #050b1c;
+  --color-bg1: #0a1636;
+  --color-panel: #102454;
+  --color-panel2: #0c1d47;
+  --color-edge: #06112f;
+
+  /* ── Linien ── */
+  --color-border: #24468f;
+  --color-border2: #2f5aa8;
+
+  /* ── Akzent ── */
+  --color-blue: #2f6bff;
+  --color-blue2: #3f79ff;
+  --color-blued: #1a49c7;
+  --color-bluel: #7aa6ff;
+
+  /* ── Text ── */
+  --color-text: #eef4ff;
+  --color-muted: #9db2dd;
+
+  /* ── Status ── */
+  --color-good: #37d9a0;
+  --color-bad: #ff6d7d;
+  --color-warn: #ffcf5c;
+  --color-mc: #4caf50;
+
+  /* ── Gold: ausschließlich für den aktiven KiritClient-Modus ──
+     Im Referenz-CSS steht dazu: "Infinite ist bewusst das einzige mit
+     Gold + Schimmer." Genau diese Knappheit halten wir hier ein. */
+  --color-gold: #c9a03a;
+  --color-goldtext: #ffe6a3;
+  --color-goldedge: #b8892b;
+
+  /* ── Kantig: jede Radius-Stufe auf 0 ── */
+  --radius-xs: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+  --radius-4xl: 0px;
+
+  --font-sans:
+    'Inter', 'Segoe UI Variable', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+/* Sicherheitsnetz: fängt auch Radien aus Fremdkomponenten ab.
+   Ausgenommen ist nur, was ausdrücklich rund sein muss (Lade-Spinner). */
+*:not([data-round]) {
+  border-radius: 0 !important;
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-bg0);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+    /* Eine Desktop-App wird nicht markiert wie eine Webseite. */
+    user-select: none;
+    cursor: default;
+    overflow: hidden;
+  }
+
+  /* Eingaben und bewusst markierbare Stellen bekommen die Auswahl zurück. */
+  input,
+  textarea,
+  [data-selectable] {
+    user-select: text;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-edge);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-border2);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-blue);
+    outline-offset: 1px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Tags — Basis exakt nach Referenz: 10px, 900, Großbuchstaben, kein Radius.
+   Varianten unterscheiden sich NUR über Farbe, nie über Form oder Größe.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.kc-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  background: #16295c;
+  color: var(--color-bluel);
+  white-space: nowrap;
+}
+
+.kc-tag--mc      { background: #12351a; color: #7fd884; }
+.kc-tag--info    { background: #232a63; color: #9aa5ff; }
+.kc-tag--warn    { background: #4a3a12; color: var(--color-warn); }
+.kc-tag--legacy  { background: #2a2a3a; color: #9d9db5; }
+.kc-tag--rank    { background: #123a2c; color: #6fe0b0; }
+.kc-tag--admin   { background: #3a1230; color: #ff9ad4; }
+.kc-tag--good    { background: #0f3326; color: #5fe0a8; }
+.kc-tag--bad     { background: #4a1220; color: #ff8fa0; }
+
+/* Kleiner, um 45° gedrehter Marker für Status-Tags. */
+.kc-tag--dot::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  flex: 0 0 auto;
+  background: currentColor;
+  transform: rotate(45deg);
+}
+
+/* ── Der eine goldene Zustand: KiritClient aktiv ────────────────────────────
+   Verlauf ist breiter als das Element (280%) und wandert durch — daher der
+   Schimmer. Innen-Highlight + äußerer Schein erzeugen die Metall-Anmutung. */
+.kc-gold {
+  background: linear-gradient(
+    100deg,
+    #3d2c07 0%,
+    #7a5a12 38%,
+    var(--color-gold) 50%,
+    #7a5a12 62%,
+    #3d2c07 100%
+  );
+  background-size: 280% 100%;
+  color: var(--color-goldtext);
+  border: 1px solid var(--color-goldedge);
+  text-shadow: 0 1px 0 rgb(0 0 0 / 0.55);
+  box-shadow:
+    0 0 10px rgb(201 160 58 / 0.28),
+    inset 0 1px 0 rgb(255 229 163 / 0.28);
+  animation: kc-shine 4.5s linear infinite;
+}
+
+/* Goldener Rand für eine ganze Instanz-Kachel — gleiche Sprache, größere Fläche. */
+.kc-gold-edge {
+  border: 1px solid var(--color-goldedge);
+  box-shadow:
+    0 0 14px rgb(201 160 58 / 0.22),
+    inset 0 1px 0 rgb(255 229 163 / 0.16);
+}
+
+@keyframes kc-shine {
+  0% {
+    background-position: 180% 0;
+  }
+  100% {
+    background-position: -80% 0;
+  }
+}
+
+@keyframes kc-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+.kc-pulse {
+  animation: kc-pulse 1.8s ease-in-out infinite;
+}
+
+/* Bewegung ist optional — Pflicht, nicht Kür.
+   Der goldene Zustand darf ohne Animation nicht verschwinden, nur ruhen. */
+@media (prefers-reduced-motion: reduce) {
+  .kc-gold {
+    animation: none;
+    background-position: 50% 0;
+  }
+  .kc-pulse {
+    animation: none;
+  }
+}
+
+/* Dünne Fortschrittsspur, 3px, kantig — wie auf der Referenzseite. */
+.kc-track {
+  height: 3px;
+  background: #16295c;
+  overflow: hidden;
+}
+.kc-track > div {
+  height: 100%;
+  background: var(--color-blue);
+}
+
+/* Ziehbereich der eigenen Titelleiste. Buttons darin müssen no-drag setzen. */
+.kc-drag {
+  -webkit-app-region: drag;
+}
+.kc-no-drag {
+  -webkit-app-region: no-drag;
+}

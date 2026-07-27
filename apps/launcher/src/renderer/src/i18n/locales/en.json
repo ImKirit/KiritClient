@@ -1,0 +1,51 @@
+{
+  "app": {
+    "name": "KiritClient"
+  },
+  "titlebar": {
+    "minimize": "Minimize",
+    "maximize": "Maximize",
+    "restore": "Restore",
+    "close": "Close"
+  },
+  "nav": {
+    "instances": "Instances",
+    "cosmetics": "Cosmetics",
+    "settings": "Settings"
+  },
+  "account": {
+    "signedOut": "Not signed in",
+    "signIn": "Sign in",
+    "switch": "Switch account",
+    "manage": "Manage accounts",
+    "add": "Add account"
+  },
+  "instances": {
+    "title": "Instances",
+    "subtitle": "Your Minecraft versions and modpacks",
+    "create": "New instance",
+    "empty": "No instances yet"
+  },
+  "cosmetics": {
+    "title": "Cosmetics",
+    "subtitle": "Capes and skins"
+  },
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Configure KiritClient",
+    "language": "Language",
+    "languageHint": "Interface language. Restart is not required.",
+    "instanceLocation": "Instance location",
+    "instanceLocationHint": "Where new instances are stored by default."
+  },
+  "update": {
+    "available": "Version {{version}} is available",
+    "download": "Update now",
+    "dismiss": "Later"
+  },
+  "common": {
+    "notBuiltYet": "Not built yet",
+    "notBuiltYetHint": "This area is part of the foundation and has no functionality yet. It will be built feature by feature.",
+    "kiritclient": "KiritClient"
+  }
+}

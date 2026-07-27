@@ -1,0 +1,41 @@
+# ── Abhängigkeiten & Build-Artefakte ─────────────────────────────────────────
+node_modules/
+dist/
+out/
+build/
+*.tsbuildinfo
+
+# ── Releases ─────────────────────────────────────────────────────────────────
+# Wird lokal vorbereitet (Installer, .blockmap, latest.yml) und NIE gepusht.
+# Der Tag wird auf GitHub angelegt, die Dateien lädt der Owner selbst hoch.
+releases/
+
+# ── Secrets ──────────────────────────────────────────────────────────────────
+# Das Repo ist öffentlich. Hier darf nie ein Wert landen.
+.env
+.env.*
+!.env.example
+*.local
+*.pem
+*.jks
+*.p12
+*.keystore
+
+# ── Arbeits- und Wissensdateien (bleiben lokal) ──────────────────────────────
+CLAUDE.md
+.claude/
+Claude/
+KiritClient-Vault Obsidian/
+krate.json
+
+# ── Editor / OS ──────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Java / Gradle (für den Mod-Teil) ─────────────────────────────────────────
+.gradle/
+mod/**/build/
+mod/**/run/

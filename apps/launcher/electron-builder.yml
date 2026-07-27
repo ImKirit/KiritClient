@@ -1,0 +1,38 @@
+appId: dev.imkirit.kiritclient
+productName: KiritClient
+copyright: Copyright © Kirit
+
+directories:
+  buildResources: build
+  # Landet im Projekt-Root unter releases/ — dieser Ordner ist gitignored.
+  # Dort entstehen genau die drei Dateien, die für ein Release gebraucht werden:
+  # KiritClient-Setup-<version>.exe, .exe.blockmap und latest.yml
+  output: ../../releases
+
+files:
+  - out/**
+  - '!**/*.map'
+
+# Namensschema wie bei Krate (Krate-Setup-2.1.0.exe), damit die Releases
+# einheitlich aussehen.
+artifactName: ${productName}-Setup-${version}.${ext}
+
+win:
+  target:
+    - target: nsis
+      arch: [x64]
+
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  deleteAppDataOnUninstall: false
+
+# Wird nur gebraucht, damit electron-builder eine latest.yml mit korrekten
+# URLs erzeugt. Hochgeladen wird NIE automatisch — der Owner legt den Tag
+# selbst an und lädt die Dateien selbst hoch (Owner-Entscheidung 2026-07-27).
+publish:
+  provider: github
+  owner: ImKirit
+  repo: KiritClient
+  releaseType: release
