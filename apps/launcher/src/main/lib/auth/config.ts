@@ -7,12 +7,15 @@
  * Stelle austauschbar ist (im alten Client stand sie doppelt: `auth/microsoft.rs`
  * und `lib.rs`).
  *
- * Stammt aus der bestehenden Registrierung des Owners und ist weiterhin gültig
- * (geprüft 2026-07-27: der Authorize-Endpunkt akzeptiert sie ohne AADSTS-Fehler).
- * Über `KIRITCLIENT_MS_CLIENT_ID` überschreibbar, falls eine neue Registrierung kommt.
+ * Registrierung des Owners für den neuen Client, geprüft am 2026-07-27: der
+ * Authorize-Endpunkt akzeptiert sie ohne AADSTS-Fehler.
+ * Über `KIRITCLIENT_MS_CLIENT_ID` überschreibbar.
+ *
+ * Die ID des alten Clients war `c36a9fb6-4f2a-41ff-90bd-ae7cc92031eb` — ebenfalls noch
+ * gültig, wird hier aber nicht mehr benutzt.
  */
 export const MS_CLIENT_ID =
-  process.env['KIRITCLIENT_MS_CLIENT_ID'] ?? 'c36a9fb6-4f2a-41ff-90bd-ae7cc92031eb'
+  process.env['KIRITCLIENT_MS_CLIENT_ID'] ?? 'abffc1b6-ea2e-4dfb-ba87-e27df87f259b'
 
 /** Von der Registrierung akzeptierter Rückleitungspunkt für eingebettete Anmeldung. */
 export const REDIRECT_URI = 'https://login.microsoftonline.com/common/oauth2/nativeclient'
