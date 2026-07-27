@@ -17,8 +17,9 @@ function getStore(): JsonStore<GlobalSettings> {
     instancesDir: defaultInstancesDir(),
     defaultRamMb: 4096,
     showSnapshots: false,
-    instanceView: 'grid',
-    instanceSort: 'lastPlayed'
+    instanceView: 'list',
+    instanceSort: 'lastPlayed',
+    accentColor: '#2f6bff'
   })
   return store
 }

@@ -38,6 +38,10 @@ export interface Instance {
   createdAt: string
   lastPlayed?: string
   playtimeSeconds: number
+  /** Angeheftete Instanzen stehen immer oben in der Liste. */
+  pinned?: boolean
+  /** Freie Gruppe/Marke, in der Detailansicht bearbeitbar. */
+  tag?: string
   settings: InstanceSettings
 }
 
@@ -61,6 +65,14 @@ export interface GlobalSettings {
   showSnapshots: boolean
   instanceView: InstanceView
   instanceSort: InstanceSort
+  /**
+   * Frei wählbare Akzentfarbe (Hex).
+   * **Gold bleibt davon unberührt** — es ist allein dem KiritClient-Zustand
+   * vorbehalten und darf nicht mitwandern.
+   */
+  accentColor: string
+  /** Zuletzt auf der Startseite gewählte Instanz. */
+  lastLaunchedId?: string
 }
 
 export type McVersionType = 'release' | 'snapshot' | 'old_beta' | 'old_alpha'

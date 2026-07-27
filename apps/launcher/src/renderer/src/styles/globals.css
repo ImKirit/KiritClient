@@ -19,7 +19,11 @@
   --color-border: #24468f;
   --color-border2: #2f5aa8;
 
-  /* ── Akzent ── */
+  /* ── Akzent ──
+     Frei wählbar (Owner 2026-07-27). Der Laufzeitwert steht in `--kc-accent`;
+     ohne Auswahl gilt das Standardblau. Gold bleibt davon UNBERÜHRT — es ist
+     allein dem KiritClient-Zustand vorbehalten. */
+  --color-accent: var(--kc-accent, #2f6bff);
   --color-blue: #2f6bff;
   --color-blue2: #3f79ff;
   --color-blued: #1a49c7;

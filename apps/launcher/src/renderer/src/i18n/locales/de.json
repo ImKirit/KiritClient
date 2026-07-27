@@ -1,19 +1,20 @@
 {
-  "app": { "name": "KiritClient" },
-
+  "app": {
+    "name": "KiritClient"
+  },
   "titlebar": {
     "minimize": "Minimieren",
     "maximize": "Maximieren",
     "restore": "Wiederherstellen",
     "close": "Schließen"
   },
-
   "nav": {
     "instances": "Instanzen",
     "cosmetics": "Cosmetics",
-    "settings": "Einstellungen"
+    "settings": "Einstellungen",
+    "home": "Start",
+    "skins": "Skins"
   },
-
   "account": {
     "signedOut": "Nicht angemeldet",
     "signIn": "Mit Microsoft anmelden",
@@ -32,9 +33,9 @@
       "xsts": "Wird geprüft…",
       "minecraft": "Minecraft…",
       "profile": "Profil wird geladen…"
-    }
+    },
+    "title": "Minecraft-Accounts"
   },
-
   "instances": {
     "title": "Instanzen",
     "subtitle": "Deine Minecraft-Versionen und Modpacks",
@@ -76,29 +77,31 @@
     "playtime": "Spielzeit",
     "lastPlayedLabel": "Zuletzt gespielt",
     "created": "Erstellt",
-    "folder": "Ordner"
+    "folder": "Ordner",
+    "import": "Importieren",
+    "pin": "Oben anheften",
+    "filter_all": "Alle",
+    "filter_kiritclient": "KiritClient",
+    "filter_vanilla": "Vanilla",
+    "filter_fabric": "Fabric"
   },
-
   "loader": {
     "vanilla": "Vanilla",
     "vanillaHint": "Minecraft wie ausgeliefert, ohne Modloader.",
     "fabric": "Fabric",
     "fabricHint": "Nötig für Mods wie Sodium und Iris."
   },
-
   "wizard": {
     "version": "Version",
     "loader": "Loader",
     "name": "Name & Bild"
   },
-
   "sort": {
     "lastPlayed": "Zuletzt gespielt",
     "name": "Name",
     "version": "Version",
     "playtime": "Spielzeit"
   },
-
   "tabs": {
     "overview": "Übersicht",
     "mods": "Mods",
@@ -106,7 +109,6 @@
     "shaders": "Shader",
     "settings": "Einstellungen"
   },
-
   "settings": {
     "title": "Einstellungen",
     "subtitle": "KiritClient konfigurieren",
@@ -120,13 +122,11 @@
     "versions": "Versionen",
     "snapshotsHint": "Standardmäßig aus, damit die Versionsliste kurz bleibt."
   },
-
   "update": {
     "available": "Version {{version}} ist verfügbar",
     "download": "Jetzt aktualisieren",
     "dismiss": "Später"
   },
-
   "common": {
     "notBuiltYet": "Noch nicht gebaut",
     "notBuiltYetHint": "Dieser Bereich hat noch keine Funktion. Er wird Feature für Feature aufgebaut.",
@@ -139,6 +139,23 @@
     "all": "Alle",
     "reset": "Zurücksetzen",
     "loading": "Wird geladen…",
-    "change": "Ändern"
+    "change": "Ändern",
+    "forward": "Vorwärts",
+    "close": "Schließen"
+  },
+  "header": {
+    "notifications": "Benachrichtigungen",
+    "noInstances": "Keine Instanz läuft",
+    "runningInstances": "{{count}} laufen"
+  },
+  "home": {
+    "launch": "Starten",
+    "stop": "Beenden",
+    "chooseInstance": "Instanz wählen",
+    "noSkin": "Kein Skin geladen",
+    "signInHint": "Melde dich an, um deinen Skin zu sehen und zu spielen."
+  },
+  "skins": {
+    "subtitle": "Deine gespeicherten Skins"
   }
 }

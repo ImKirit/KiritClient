@@ -7,15 +7,26 @@ import type {
   GlobalSettings,
   Instance,
   InstanceSort,
-  InstanceView
+  InstanceView,
+  LaunchProgress,
+  RunningInstance
 } from '../../../shared/types'
 
 interface AppState {
   instances: Instance[]
   settings: GlobalSettings | null
   accounts: AccountsState
+  running: RunningInstance[]
+  /** Fortschritt je startender Instanz. */
+  launching: Record<string, LaunchProgress>
   loaded: boolean
   error: string | null
+
+  launch: (instanceId: string) => Promise<void>
+  stop: (instanceId: string) => Promise<void>
+  applyProgress: (p: LaunchProgress) => void
+  setRunning: (r: RunningInstance[]) => void
+  clearLaunch: (instanceId: string) => void
 
   signIn: () => Promise<Account | null>
   setActiveAccount: (id: string) => Promise<void>
@@ -44,8 +55,34 @@ export const useApp = create<AppState>((set, get) => ({
   instances: [],
   settings: null,
   accounts: { accounts: [], activeId: null },
+  running: [],
+  launching: {},
   loaded: false,
   error: null,
+
+  launch: async (instanceId) => {
+    set({ error: null })
+    try {
+      await window.kirit.launch.start(instanceId)
+      set({ running: await window.kirit.launch.running() })
+    } catch (e) {
+      set({ error: e instanceof Error ? e.message : String(e) })
+      get().clearLaunch(instanceId)
+    }
+  },
+
+  stop: async (instanceId) => {
+    await window.kirit.launch.stop(instanceId)
+  },
+
+  applyProgress: (p) => set({ launching: { ...get().launching, [p.instanceId]: p } }),
+  setRunning: (running) => set({ running }),
+
+  clearLaunch: (instanceId) => {
+    const next = { ...get().launching }
+    delete next[instanceId]
+    set({ launching: next })
+  },
 
   signIn: async () => {
     const result = await window.kirit.accounts.signIn()
@@ -64,12 +101,13 @@ export const useApp = create<AppState>((set, get) => ({
 
   load: async () => {
     try {
-      const [instances, settings, accounts] = await Promise.all([
+      const [instances, settings, accounts, running] = await Promise.all([
         window.kirit.instances.list(),
         window.kirit.settings.get(),
-        window.kirit.accounts.state()
+        window.kirit.accounts.state(),
+        window.kirit.launch.running()
       ])
-      set({ instances, settings, accounts, loaded: true, error: null })
+      set({ instances, settings, accounts, running, loaded: true, error: null })
     } catch (e) {
       set({ loaded: true, error: e instanceof Error ? e.message : String(e) })
     }

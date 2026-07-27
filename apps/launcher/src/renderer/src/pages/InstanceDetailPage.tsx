@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import {
   ArrowLeft,
   Play,
@@ -30,7 +30,12 @@ export default function InstanceDetailPage(): React.JSX.Element {
   const navigate = useNavigate()
   const { instances, settings, updateInstance, removeInstance, pickIcon, moveInstance } = useApp()
 
-  const [tab, setTab] = useState<Tab>('overview')
+  // Die Zeilen-Knöpfe MODS und ⚙ springen direkt auf den passenden Reiter.
+  const [params] = useSearchParams()
+  const requested = params.get('tab')
+  const [tab, setTab] = useState<Tab>(
+    TABS.includes(requested as Tab) ? (requested as Tab) : 'overview'
+  )
   const [confirmDelete, setConfirmDelete] = useState(false)
   const [deleteFiles, setDeleteFiles] = useState(true)
   const [moving, setMoving] = useState<{ copied: number; total: number } | null>(null)
@@ -66,7 +71,7 @@ export default function InstanceDetailPage(): React.JSX.Element {
       <header className="shrink-0 border-b border-edge px-6 pt-4 pb-0">
         <button
           type="button"
-          onClick={() => navigate('/')}
+          onClick={() => navigate('/instances')}
           className="mb-3 flex items-center gap-1.5 text-[11px] font-bold text-muted transition-colors hover:text-text"
         >
           <ArrowLeft size={13} />

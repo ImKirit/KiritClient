@@ -1,19 +1,20 @@
 {
-  "app": { "name": "KiritClient" },
-
+  "app": {
+    "name": "KiritClient"
+  },
   "titlebar": {
     "minimize": "Minimize",
     "maximize": "Maximize",
     "restore": "Restore",
     "close": "Close"
   },
-
   "nav": {
     "instances": "Instances",
     "cosmetics": "Cosmetics",
-    "settings": "Settings"
+    "settings": "Settings",
+    "home": "Home",
+    "skins": "Skins"
   },
-
   "account": {
     "signedOut": "Not signed in",
     "signIn": "Sign in with Microsoft",
@@ -32,9 +33,9 @@
       "xsts": "Verifying…",
       "minecraft": "Minecraft…",
       "profile": "Loading profile…"
-    }
+    },
+    "title": "Minecraft accounts"
   },
-
   "instances": {
     "title": "Instances",
     "subtitle": "Your Minecraft versions and modpacks",
@@ -76,29 +77,31 @@
     "playtime": "Playtime",
     "lastPlayedLabel": "Last played",
     "created": "Created",
-    "folder": "Folder"
+    "folder": "Folder",
+    "import": "Import",
+    "pin": "Pin to top",
+    "filter_all": "All",
+    "filter_kiritclient": "KiritClient",
+    "filter_vanilla": "Vanilla",
+    "filter_fabric": "Fabric"
   },
-
   "loader": {
     "vanilla": "Vanilla",
     "vanillaHint": "Minecraft as shipped, no mod loader.",
     "fabric": "Fabric",
     "fabricHint": "Required for mods like Sodium and Iris."
   },
-
   "wizard": {
     "version": "Version",
     "loader": "Loader",
     "name": "Name & image"
   },
-
   "sort": {
     "lastPlayed": "Last played",
     "name": "Name",
     "version": "Version",
     "playtime": "Playtime"
   },
-
   "tabs": {
     "overview": "Overview",
     "mods": "Mods",
@@ -106,7 +109,6 @@
     "shaders": "Shaders",
     "settings": "Settings"
   },
-
   "settings": {
     "title": "Settings",
     "subtitle": "Configure KiritClient",
@@ -120,13 +122,11 @@
     "versions": "Versions",
     "snapshotsHint": "Off by default so the version list stays short."
   },
-
   "update": {
     "available": "Version {{version}} is available",
     "download": "Update now",
     "dismiss": "Later"
   },
-
   "common": {
     "notBuiltYet": "Not built yet",
     "notBuiltYetHint": "This area has no functionality yet. It will be built feature by feature.",
@@ -139,6 +139,23 @@
     "all": "All",
     "reset": "Reset",
     "loading": "Loading…",
-    "change": "Change"
+    "change": "Change",
+    "forward": "Forward",
+    "close": "Close"
+  },
+  "header": {
+    "notifications": "Notifications",
+    "noInstances": "No instances",
+    "runningInstances": "{{count}} running"
+  },
+  "home": {
+    "launch": "Launch",
+    "stop": "Stop",
+    "chooseInstance": "Choose instance",
+    "noSkin": "No skin loaded",
+    "signInHint": "Sign in to see your skin and start playing."
+  },
+  "skins": {
+    "subtitle": "Your saved skins"
   }
 }
