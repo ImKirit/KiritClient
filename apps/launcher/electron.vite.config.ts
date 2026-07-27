@@ -20,7 +20,16 @@ export default defineConfig({
     plugins: [react(), tailwindcss()],
     build: {
       rollupOptions: {
-        input: resolve(__dirname, 'src/renderer/index.html')
+        input: resolve(__dirname, 'src/renderer/index.html'),
+        output: {
+          // Fremdbibliotheken vom eigenen Code trennen: sie ändern sich selten,
+          // der eigene Code ständig. Ohne das wächst ein einziger großer Brocken.
+          manualChunks: {
+            react: ['react', 'react-dom', 'react-router-dom'],
+            i18n: ['i18next', 'react-i18next'],
+            icons: ['lucide-react']
+          }
+        }
       }
     }
   }

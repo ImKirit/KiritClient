@@ -11,9 +11,23 @@ interface InstancesFile {
   instances: Instance[]
 }
 
-const store = new JsonStore<InstancesFile>(join(appDataDir(), 'instances.json'), {
-  instances: []
-})
+/**
+ * Store wird erst bei Bedarf angelegt — `app.getPath` ist vor `app.whenReady`
+ * nicht verlässlich, und Tests können den Ort so überschreiben.
+ */
+let storeRef: JsonStore<InstancesFile> | null = null
+
+function store(): JsonStore<InstancesFile> {
+  storeRef ??= new JsonStore<InstancesFile>(join(appDataDir(), 'instances.json'), {
+    instances: []
+  })
+  return storeRef
+}
+
+/** Nur für Tests: Speicherort umbiegen und Zwischenspeicher leeren. */
+export function __setStoreForTests(file: string): void {
+  storeRef = new JsonStore<InstancesFile>(file, { instances: [] })
+}
 
 /** Ordnername aus dem Instanznamen — ohne Zeichen, die Windows nicht mag. */
 function folderName(name: string, id: string): string {
@@ -28,7 +42,7 @@ function folderName(name: string, id: string): string {
 }
 
 export async function listInstances(): Promise<Instance[]> {
-  return (await store.read()).instances
+  return (await store().read()).instances
 }
 
 export async function createInstance(input: CreateInstanceInput): Promise<Instance> {
@@ -53,8 +67,8 @@ export async function createInstance(input: CreateInstanceInput): Promise<Instan
     settings: {}
   }
 
-  const file = await store.read()
-  await store.write({ instances: [...file.instances, instance] })
+  const file = await store().read()
+  await store().write({ instances: [...file.instances, instance] })
   return instance
 }
 
@@ -62,19 +76,19 @@ export async function updateInstance(
   id: string,
   patch: Partial<Omit<Instance, 'id' | 'dir'>>
 ): Promise<Instance> {
-  const file = await store.read()
+  const file = await store().read()
   const idx = file.instances.findIndex((i) => i.id === id)
   if (idx === -1) throw new Error(`Instance ${id} not found`)
 
   const next = { ...file.instances[idx], ...patch }
   const instances = [...file.instances]
   instances[idx] = next
-  await store.write({ instances })
+  await store().write({ instances })
   return next
 }
 
 export async function deleteInstance(id: string, deleteFiles: boolean): Promise<void> {
-  const file = await store.read()
+  const file = await store().read()
   const instance = file.instances.find((i) => i.id === id)
   if (!instance) throw new Error(`Instance ${id} not found`)
 
@@ -87,12 +101,12 @@ export async function deleteInstance(id: string, deleteFiles: boolean): Promise<
     if (err) throw new Error(`Could not move instance folder to trash: ${err.message}`)
   }
 
-  await store.write({ instances: file.instances.filter((i) => i.id !== id) })
+  await store().write({ instances: file.instances.filter((i) => i.id !== id) })
 }
 
 /** Eigenes Profilbild setzen: wird in den Instanzordner kopiert, nicht verlinkt. */
 export async function setInstanceIcon(id: string, sourcePath: string): Promise<Instance> {
-  const file = await store.read()
+  const file = await store().read()
   const instance = file.instances.find((i) => i.id === id)
   if (!instance) throw new Error(`Instance ${id} not found`)
 
@@ -105,7 +119,7 @@ export async function setInstanceIcon(id: string, sourcePath: string): Promise<I
 }
 
 export async function openInstanceFolder(id: string): Promise<void> {
-  const file = await store.read()
+  const file = await store().read()
   const instance = file.instances.find((i) => i.id === id)
   if (!instance) throw new Error(`Instance ${id} not found`)
   await shell.openPath(instance.dir)
@@ -137,7 +151,7 @@ export async function moveInstance(
   targetParentDir: string,
   onProgress: (copiedBytes: number, totalBytes: number) => void
 ): Promise<Instance> {
-  const file = await store.read()
+  const file = await store().read()
   const instance = file.instances.find((i) => i.id === id)
   if (!instance) throw new Error(`Instance ${id} not found`)
 
@@ -168,7 +182,7 @@ export async function moveInstance(
 
   const oldDir = instance.dir
   const instances = file.instances.map((i) => (i.id === id ? { ...i, dir: target } : i))
-  await store.write({ instances })
+  await store().write({ instances })
 
   // Erst jetzt das Original entfernen — der neue Ort ist bereits eingetragen.
   await rm(oldDir, { recursive: true, force: true })

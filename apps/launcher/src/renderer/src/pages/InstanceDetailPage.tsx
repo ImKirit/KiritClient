@@ -19,6 +19,7 @@ import Tag, { GoldTag } from '../components/Tag'
 import Placeholder from '../components/Placeholder'
 import InstanceAvatar from '../components/instances/InstanceAvatar'
 import { formatBytes, formatLastPlayed, formatPlaytime } from '../lib/format'
+import { useDebouncedField } from '../lib/useDebouncedValue'
 
 type Tab = 'overview' | 'mods' | 'resourcepacks' | 'shaders' | 'settings'
 const TABS: Tab[] = ['overview', 'mods', 'resourcepacks', 'shaders', 'settings']
@@ -35,6 +36,11 @@ export default function InstanceDetailPage(): React.JSX.Element {
   const [moving, setMoving] = useState<{ copied: number; total: number } | null>(null)
 
   const instance = instances.find((i) => i.id === id)
+
+  // Name wird verzögert gespeichert, nicht bei jedem Tastendruck.
+  const [nameDraft, setNameDraft] = useDebouncedField(instance?.name ?? '', (next) => {
+    if (instance && next.trim()) void updateInstance(instance.id, { name: next.trim() })
+  })
 
   useEffect(() => {
     return window.kirit.instances.onMoveProgress((p) => {
@@ -151,8 +157,8 @@ export default function InstanceDetailPage(): React.JSX.Element {
               <label className="block">
                 <span className="mb-1.5 block text-[12px] font-bold">{t('instances.name')}</span>
                 <input
-                  value={instance.name}
-                  onChange={(e) => void updateInstance(instance.id, { name: e.target.value })}
+                  value={nameDraft}
+                  onChange={(e) => setNameDraft(e.target.value)}
                   className="w-full border border-edge bg-bg0 px-3 py-2 text-[13px] outline-none focus:border-blue"
                 />
               </label>
