@@ -110,3 +110,26 @@ export interface AccountsState {
   accounts: Account[]
   activeId: string | null
 }
+
+export type LaunchStage =
+  | 'version'
+  | 'java'
+  | 'client'
+  | 'libraries'
+  | 'assets'
+  | 'natives'
+  | 'starting'
+
+/** Fortschritt eines Startvorgangs, wie ihn die Oberfläche anzeigt. */
+export interface LaunchProgress {
+  instanceId: string
+  stage: LaunchStage
+  /** 0..1 über den gesamten Vorgang. */
+  progress: number
+  detail: string
+}
+
+export interface RunningInstance {
+  instanceId: string
+  startedAt: number
+}

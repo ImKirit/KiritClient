@@ -6,6 +6,7 @@ import type {
   CreateInstanceInput,
   GlobalSettings,
   Instance,
+  LaunchProgress,
   VersionManifest
 } from '../shared/types'
 
@@ -82,6 +83,35 @@ const api = {
     /** Bild wählen ohne bestehende Instanz — liefert Pfad + Vorschau als Data-URL. */
     pickImage: (): Promise<{ path: string; dataUrl: string } | null> =>
       ipcRenderer.invoke('dialog:pick-image')
+  },
+
+  launch: {
+    start: (instanceId: string): Promise<number> =>
+      ipcRenderer.invoke('launch:start', instanceId),
+    stop: (instanceId: string): Promise<void> => ipcRenderer.invoke('launch:stop', instanceId),
+    running: (): Promise<{ instanceId: string; startedAt: number }[]> =>
+      ipcRenderer.invoke('launch:running'),
+    onProgress: (cb: (p: LaunchProgress) => void): (() => void) => {
+      const l = (_e: unknown, p: LaunchProgress): void => cb(p)
+      ipcRenderer.on('launch:progress', l)
+      return () => {
+        ipcRenderer.off('launch:progress', l)
+      }
+    },
+    onLog: (cb: (e: { instanceId: string; line: string }) => void): (() => void) => {
+      const l = (_e: unknown, p: { instanceId: string; line: string }): void => cb(p)
+      ipcRenderer.on('launch:log', l)
+      return () => {
+        ipcRenderer.off('launch:log', l)
+      }
+    },
+    onExit: (cb: (e: { instanceId: string; code: number | null }) => void): (() => void) => {
+      const l = (_e: unknown, p: { instanceId: string; code: number | null }): void => cb(p)
+      ipcRenderer.on('launch:exit', l)
+      return () => {
+        ipcRenderer.off('launch:exit', l)
+      }
+    }
   },
 
   accounts: {

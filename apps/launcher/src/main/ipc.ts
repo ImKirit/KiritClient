@@ -20,6 +20,7 @@ import {
   removeAccount,
   SignInCancelled
 } from './lib/auth'
+import { launchInstance, stopInstance, runningInstances } from './lib/minecraft/launch'
 
 /**
  * Alle IPC-Handler an einer Stelle.
@@ -128,4 +129,35 @@ export function registerIpc(): void {
 
   ipcMain.handle('accounts:set-active', (_e, id: string) => setActiveAccount(id))
   ipcMain.handle('accounts:remove', (_e, id: string) => removeAccount(id))
+
+  // ── Spielstart ─────────────────────────────────────────────────────────────
+  ipcMain.handle('launch:start', async (e, instanceId: string) => {
+    const instances = await listInstances()
+    const instance = instances.find((i) => i.id === instanceId)
+    if (!instance) throw new Error(`Instance ${instanceId} not found`)
+
+    const startedAt = Date.now()
+    await updateInstance(instance.id, { lastPlayed: new Date().toISOString() })
+
+    return launchInstance(instance, {
+      onProgress: (p) => e.sender.send('launch:progress', p),
+      onLog: (id, line) => e.sender.send('launch:log', { instanceId: id, line }),
+      onExit: (id, code) => {
+        // Spielzeit erst beim Beenden schreiben — vorher weiß niemand, wie lange.
+        const seconds = Math.round((Date.now() - startedAt) / 1000)
+        void listInstances().then((list) => {
+          const current = list.find((i) => i.id === id)
+          if (current) {
+            void updateInstance(id, {
+              playtimeSeconds: current.playtimeSeconds + seconds
+            })
+          }
+        })
+        e.sender.send('launch:exit', { instanceId: id, code })
+      }
+    })
+  })
+
+  ipcMain.handle('launch:stop', (_e, instanceId: string) => stopInstance(instanceId))
+  ipcMain.handle('launch:running', () => runningInstances())
 }
