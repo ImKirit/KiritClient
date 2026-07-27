@@ -116,7 +116,7 @@ export default function InstanceDetailPage(): React.JSX.Element {
               onClick={() => setTab(tb)}
               className={`border-b-2 px-3 py-2 text-[12px] font-bold transition-colors ${
                 tab === tb
-                  ? 'border-blue text-text'
+                  ? 'border-accent text-text'
                   : 'border-transparent text-muted hover:text-text'
               }`}
             >
@@ -164,7 +164,7 @@ export default function InstanceDetailPage(): React.JSX.Element {
                 <input
                   value={nameDraft}
                   onChange={(e) => setNameDraft(e.target.value)}
-                  className="w-full border border-edge bg-bg0 px-3 py-2 text-[13px] outline-none focus:border-blue"
+                  className="w-full border border-edge bg-bg0 px-3 py-2 text-[13px] outline-none focus:border-accent"
                 />
               </label>
 
@@ -206,7 +206,7 @@ export default function InstanceDetailPage(): React.JSX.Element {
                     min={1024}
                     value={instance.settings.ramMb ?? settings?.defaultRamMb ?? 4096}
                     onChange={(e) => patchSettings({ ramMb: Number(e.target.value) })}
-                    className="w-full border border-edge bg-bg0 px-2 py-1.5 text-[12px] outline-none focus:border-blue"
+                    className="w-full border border-edge bg-bg0 px-2 py-1.5 text-[12px] outline-none focus:border-accent"
                   />
                 </label>
                 <label className="block">
@@ -221,7 +221,7 @@ export default function InstanceDetailPage(): React.JSX.Element {
                       onChange={(e) =>
                         patchSettings({ width: Number(e.target.value) || undefined })
                       }
-                      className="w-full border border-edge bg-bg0 px-2 py-1.5 text-[12px] outline-none focus:border-blue"
+                      className="w-full border border-edge bg-bg0 px-2 py-1.5 text-[12px] outline-none focus:border-accent"
                     />
                     <span className="text-muted">×</span>
                     <input
@@ -231,7 +231,7 @@ export default function InstanceDetailPage(): React.JSX.Element {
                       onChange={(e) =>
                         patchSettings({ height: Number(e.target.value) || undefined })
                       }
-                      className="w-full border border-edge bg-bg0 px-2 py-1.5 text-[12px] outline-none focus:border-blue"
+                      className="w-full border border-edge bg-bg0 px-2 py-1.5 text-[12px] outline-none focus:border-accent"
                     />
                   </div>
                 </label>
@@ -243,7 +243,7 @@ export default function InstanceDetailPage(): React.JSX.Element {
                   value={instance.settings.javaArgs ?? ''}
                   onChange={(e) => patchSettings({ javaArgs: e.target.value || undefined })}
                   placeholder="-XX:+UseG1GC"
-                  className="w-full border border-edge bg-bg0 px-2 py-1.5 font-mono text-[12px] outline-none focus:border-blue"
+                  className="w-full border border-edge bg-bg0 px-2 py-1.5 font-mono text-[12px] outline-none focus:border-accent"
                 />
               </label>
             </section>

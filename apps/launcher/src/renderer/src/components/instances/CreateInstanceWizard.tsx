@@ -178,7 +178,7 @@ export default function CreateInstanceWizard({
                   type="button"
                   onClick={() => setMcVersion(v.id)}
                   className={`flex w-full items-center justify-between px-3 py-2 text-left text-[12px] transition-colors ${
-                    mcVersion === v.id ? 'bg-blued text-text' : 'hover:bg-panel'
+                    mcVersion === v.id ? 'bg-accent/20 text-text' : 'hover:bg-panel'
                   }`}
                 >
                   <span className="font-bold">{v.id}</span>
@@ -205,7 +205,7 @@ export default function CreateInstanceWizard({
                 type="button"
                 onClick={() => setLoader(l)}
                 className={`border p-3 text-left transition-colors ${
-                  loader === l ? 'border-blue bg-blued' : 'border-edge bg-panel hover:border-border'
+                  loader === l ? 'border-accent bg-accent/20' : 'border-edge bg-panel hover:border-border'
                 }`}
               >
                 <span className="block text-[13px] font-bold">{t(`loader.${l}`)}</span>
@@ -237,7 +237,7 @@ export default function CreateInstanceWizard({
               onChange={(e) => setName(e.target.value)}
               placeholder={mcVersion ? `Minecraft ${mcVersion}` : ''}
               autoFocus
-              className="w-full border border-edge bg-bg0 px-3 py-2 text-[13px] outline-none focus:border-blue"
+              className="w-full border border-edge bg-bg0 px-3 py-2 text-[13px] outline-none focus:border-accent"
             />
           </label>
 

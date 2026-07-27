@@ -55,7 +55,7 @@ export default function SettingsPage(): React.JSX.Element {
                   className={[
                     'border px-3 py-1.5 text-[12px] font-bold transition-colors',
                     settings.language === code
-                      ? 'border-blue bg-blued text-text'
+                      ? 'border-accent bg-accent/20 text-text'
                       : 'border-edge bg-panel text-muted hover:border-border hover:text-text'
                   ].join(' ')}
                 >
@@ -98,7 +98,7 @@ export default function SettingsPage(): React.JSX.Element {
                 min={1024}
                 value={settings.defaultRamMb}
                 onChange={(e) => void patchSettings({ defaultRamMb: Number(e.target.value) })}
-                className="w-full border border-edge bg-bg0 px-2 py-1.5 text-[12px] outline-none focus:border-blue"
+                className="w-full border border-edge bg-bg0 px-2 py-1.5 text-[12px] outline-none focus:border-accent"
               />
             </label>
           </Section>

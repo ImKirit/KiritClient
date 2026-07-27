@@ -34,7 +34,7 @@ export default function Toggle({
           checked
             ? gold
               ? 'kc-gold justify-end border-goldedge'
-              : 'justify-end border-blue bg-blued'
+              : 'justify-end border-accent bg-accent/20'
             : 'justify-start border-edge bg-bg0'
         ].join(' ')}
       >
