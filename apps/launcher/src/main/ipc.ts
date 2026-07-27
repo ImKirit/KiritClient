@@ -13,6 +13,13 @@ import {
 } from './lib/instances'
 import { getSettings, patchSettings } from './lib/settings'
 import { fetchVersionManifest } from './lib/versions'
+import {
+  signIn,
+  getState as getAccountsState,
+  setActive as setActiveAccount,
+  removeAccount,
+  SignInCancelled
+} from './lib/auth'
 
 /**
  * Alle IPC-Handler an einer Stelle.
@@ -104,4 +111,21 @@ export function registerIpc(): void {
 
   // ── Minecraft-Versionen ────────────────────────────────────────────────────
   ipcMain.handle('versions:manifest', () => fetchVersionManifest())
+
+  // ── Accounts ───────────────────────────────────────────────────────────────
+  ipcMain.handle('accounts:state', () => getAccountsState())
+
+  ipcMain.handle('accounts:sign-in', async (e) => {
+    const win = BrowserWindow.fromWebContents(e.sender)!
+    try {
+      return await signIn(win, (step) => e.sender.send('accounts:sign-in-step', step))
+    } catch (err) {
+      // Abbruch ist kein Fehler — die Oberfläche soll dafür nichts Rotes zeigen.
+      if (err instanceof SignInCancelled) return null
+      throw err
+    }
+  })
+
+  ipcMain.handle('accounts:set-active', (_e, id: string) => setActiveAccount(id))
+  ipcMain.handle('accounts:remove', (_e, id: string) => removeAccount(id))
 }

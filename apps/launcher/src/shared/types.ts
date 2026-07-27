@@ -86,3 +86,27 @@ export interface CreateInstanceInput {
 
 /** Ergebnis von Operationen, die scheitern dürfen, ohne dass es ein Absturz ist. */
 export type Result<T> = { ok: true; value: T } | { ok: false; error: string }
+
+/**
+ * Ein angemeldeter Minecraft-Account.
+ *
+ * Hier stehen **keine Tokens**. Die liegen verschlüsselt daneben und verlassen den
+ * Main-Prozess nie — der Renderer bekommt nur, was er anzeigen muss.
+ */
+export interface Account {
+  /** Minecraft-Profil-UUID. */
+  id: string
+  username: string
+  /** Wird für den Spielstart gebraucht und diesmal mitgespeichert. */
+  xuid: string
+  addedAt: string
+  /** Ablauf des Minecraft-Tokens, ISO. */
+  expiresAt: string
+  /** Skin-Textur auf textures.minecraft.net — daraus wird der Kopf ausgeschnitten. */
+  skinUrl?: string
+}
+
+export interface AccountsState {
+  accounts: Account[]
+  activeId: string | null
+}

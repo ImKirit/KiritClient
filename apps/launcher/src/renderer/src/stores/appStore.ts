@@ -1,6 +1,8 @@
 import { create } from 'zustand'
 
 import type {
+  Account,
+  AccountsState,
   CreateInstanceInput,
   GlobalSettings,
   Instance,
@@ -11,8 +13,13 @@ import type {
 interface AppState {
   instances: Instance[]
   settings: GlobalSettings | null
+  accounts: AccountsState
   loaded: boolean
   error: string | null
+
+  signIn: () => Promise<Account | null>
+  setActiveAccount: (id: string) => Promise<void>
+  removeAccount: (id: string) => Promise<void>
 
   load: () => Promise<void>
   createInstance: (input: CreateInstanceInput) => Promise<Instance>
@@ -36,16 +43,33 @@ interface AppState {
 export const useApp = create<AppState>((set, get) => ({
   instances: [],
   settings: null,
+  accounts: { accounts: [], activeId: null },
   loaded: false,
   error: null,
 
+  signIn: async () => {
+    const result = await window.kirit.accounts.signIn()
+    if (!result) return null // vom Nutzer abgebrochen
+    set({ accounts: result.state })
+    return result.account
+  },
+
+  setActiveAccount: async (id) => {
+    set({ accounts: await window.kirit.accounts.setActive(id) })
+  },
+
+  removeAccount: async (id) => {
+    set({ accounts: await window.kirit.accounts.remove(id) })
+  },
+
   load: async () => {
     try {
-      const [instances, settings] = await Promise.all([
+      const [instances, settings, accounts] = await Promise.all([
         window.kirit.instances.list(),
-        window.kirit.settings.get()
+        window.kirit.settings.get(),
+        window.kirit.accounts.state()
       ])
-      set({ instances, settings, loaded: true, error: null })
+      set({ instances, settings, accounts, loaded: true, error: null })
     } catch (e) {
       set({ loaded: true, error: e instanceof Error ? e.message : String(e) })
     }

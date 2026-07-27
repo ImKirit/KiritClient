@@ -1,6 +1,8 @@
 import { contextBridge, ipcRenderer } from 'electron'
 
 import type {
+  Account,
+  AccountsState,
   CreateInstanceInput,
   GlobalSettings,
   Instance,
@@ -80,6 +82,23 @@ const api = {
     /** Bild wählen ohne bestehende Instanz — liefert Pfad + Vorschau als Data-URL. */
     pickImage: (): Promise<{ path: string; dataUrl: string } | null> =>
       ipcRenderer.invoke('dialog:pick-image')
+  },
+
+  accounts: {
+    state: (): Promise<AccountsState> => ipcRenderer.invoke('accounts:state'),
+    /** Öffnet das Microsoft-Fenster. `null` heißt: vom Nutzer abgebrochen. */
+    signIn: (): Promise<{ account: Account; state: AccountsState } | null> =>
+      ipcRenderer.invoke('accounts:sign-in'),
+    setActive: (id: string): Promise<AccountsState> =>
+      ipcRenderer.invoke('accounts:set-active', id),
+    remove: (id: string): Promise<AccountsState> => ipcRenderer.invoke('accounts:remove', id),
+    onSignInStep: (cb: (step: string) => void): (() => void) => {
+      const listener = (_e: unknown, step: string): void => cb(step)
+      ipcRenderer.on('accounts:sign-in-step', listener)
+      return () => {
+        ipcRenderer.off('accounts:sign-in-step', listener)
+      }
+    }
   }
 }
 

@@ -16,10 +16,23 @@
 
   "account": {
     "signedOut": "Nicht angemeldet",
-    "signIn": "Anmelden",
+    "signIn": "Mit Microsoft anmelden",
+    "signInShort": "Anmelden",
     "switch": "Account wechseln",
     "manage": "Accounts verwalten",
-    "add": "Account hinzufügen"
+    "add": "Account hinzufügen",
+    "remove": "Abmelden",
+    "signingIn": "Anmeldung läuft…",
+    "signedInTitle": "Angemeldet",
+    "nowActive": "Jetzt der aktive Account",
+    "step": {
+      "opening": "Warte auf Microsoft…",
+      "exchange": "Anmeldung wird abgeschlossen…",
+      "xbox": "Xbox Live…",
+      "xsts": "Wird geprüft…",
+      "minecraft": "Minecraft…",
+      "profile": "Profil wird geladen…"
+    }
   },
 
   "instances": {
@@ -122,6 +135,7 @@
     "next": "Weiter",
     "create": "Erstellen",
     "cancel": "Abbrechen",
+    "ok": "OK",
     "all": "Alle",
     "reset": "Zurücksetzen",
     "loading": "Wird geladen…",
