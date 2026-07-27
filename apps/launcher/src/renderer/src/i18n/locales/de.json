@@ -1,18 +1,19 @@
 {
-  "app": {
-    "name": "KiritClient"
-  },
+  "app": { "name": "KiritClient" },
+
   "titlebar": {
     "minimize": "Minimieren",
     "maximize": "Maximieren",
     "restore": "Wiederherstellen",
     "close": "Schließen"
   },
+
   "nav": {
     "instances": "Instanzen",
     "cosmetics": "Cosmetics",
     "settings": "Einstellungen"
   },
+
   "account": {
     "signedOut": "Nicht angemeldet",
     "signIn": "Anmelden",
@@ -20,32 +21,110 @@
     "manage": "Accounts verwalten",
     "add": "Account hinzufügen"
   },
+
   "instances": {
     "title": "Instanzen",
     "subtitle": "Deine Minecraft-Versionen und Modpacks",
     "create": "Neue Instanz",
-    "empty": "Noch keine Instanzen"
+    "empty": "Noch keine Instanzen",
+    "noMatch": "Nichts passt zu deiner Suche",
+    "search": "Instanzen durchsuchen…",
+    "searchVersion": "Versionen durchsuchen…",
+    "showSnapshots": "Snapshots und alte Versionen anzeigen",
+    "latest": "Neueste",
+    "filter": "Filter",
+    "loaderFilter": "Loader",
+    "kcOnly": "Nur KiritClient",
+    "viewGrid": "Kachelansicht",
+    "viewList": "Listenansicht",
+    "name": "Name",
+    "image": "Bild",
+    "chooseImage": "Bild wählen",
+    "imageHint": "Optional. Ohne eigenes Bild wird eines aus dem Namen erzeugt.",
+    "kiritClientHint": "Fügt dieser Instanz die KiritClient-Ingame-Funktionen hinzu.",
+    "neverPlayed": "Nie gespielt",
+    "play": "Spielen",
+    "notFound": "Diese Instanz existiert nicht mehr.",
+    "openFolder": "Ordner öffnen",
+    "move": "In anderen Ordner verschieben",
+    "delete": "Instanz löschen",
+    "deleteConfirm": "„{{name}}“ wirklich löschen?",
+    "deleteFiles": "Auch den Instanzordner löschen",
+    "deleteTrashHint": "Der Ordner wandert in den Papierkorb, er wird nicht endgültig gelöscht.",
+    "dangerZone": "Gefahrenbereich",
+    "gameSettings": "Spiel-Einstellungen",
+    "gameSettingsHint": "Gelten nur für diese Instanz. Leer lassen für die Vorgabewerte.",
+    "ram": "Arbeitsspeicher (MB)",
+    "resolution": "Auflösung",
+    "javaArgs": "Java-Argumente",
+    "location": "Speicherort",
+    "version": "Version",
+    "loaderLabel": "Loader",
+    "playtime": "Spielzeit",
+    "lastPlayedLabel": "Zuletzt gespielt",
+    "created": "Erstellt",
+    "folder": "Ordner"
   },
-  "cosmetics": {
-    "title": "Cosmetics",
-    "subtitle": "Capes und Skins"
+
+  "loader": {
+    "vanilla": "Vanilla",
+    "vanillaHint": "Minecraft wie ausgeliefert, ohne Modloader.",
+    "fabric": "Fabric",
+    "fabricHint": "Nötig für Mods wie Sodium und Iris."
   },
+
+  "wizard": {
+    "version": "Version",
+    "loader": "Loader",
+    "name": "Name & Bild"
+  },
+
+  "sort": {
+    "lastPlayed": "Zuletzt gespielt",
+    "name": "Name",
+    "version": "Version",
+    "playtime": "Spielzeit"
+  },
+
+  "tabs": {
+    "overview": "Übersicht",
+    "mods": "Mods",
+    "resourcepacks": "Resourcepacks",
+    "shaders": "Shader",
+    "settings": "Einstellungen"
+  },
+
   "settings": {
     "title": "Einstellungen",
     "subtitle": "KiritClient konfigurieren",
     "language": "Sprache",
-    "languageHint": "Sprache der Oberfläche. Ein Neustart ist nicht nötig.",
+    "languageHint": "Sprache der Oberfläche. Kein Neustart nötig.",
     "instanceLocation": "Speicherort für Instanzen",
-    "instanceLocationHint": "Wo neue Instanzen standardmäßig abgelegt werden."
+    "instanceLocationHint": "Wo neue Instanzen standardmäßig abgelegt werden.",
+    "instanceLocationNote": "Vorhandene Instanzen bleiben, wo sie sind. Einzeln verschieben geht in ihren Einstellungen.",
+    "defaults": "Vorgaben für neue Instanzen",
+    "defaultsHint": "Jede Instanz kann diese Werte überschreiben.",
+    "versions": "Versionen",
+    "snapshotsHint": "Standardmäßig aus, damit die Versionsliste kurz bleibt."
   },
+
   "update": {
     "available": "Version {{version}} ist verfügbar",
     "download": "Jetzt aktualisieren",
     "dismiss": "Später"
   },
+
   "common": {
     "notBuiltYet": "Noch nicht gebaut",
-    "notBuiltYetHint": "Dieser Bereich gehört zum Grundgerüst und hat noch keine Funktion. Er wird Feature für Feature aufgebaut.",
-    "kiritclient": "KiritClient"
+    "notBuiltYetHint": "Dieser Bereich hat noch keine Funktion. Er wird Feature für Feature aufgebaut.",
+    "kiritclient": "KiritClient",
+    "back": "Zurück",
+    "next": "Weiter",
+    "create": "Erstellen",
+    "cancel": "Abbrechen",
+    "all": "Alle",
+    "reset": "Zurücksetzen",
+    "loading": "Wird geladen…",
+    "change": "Ändern"
   }
 }

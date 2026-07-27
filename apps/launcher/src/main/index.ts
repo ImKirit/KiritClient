@@ -1,5 +1,37 @@
 import { join } from 'node:path'
-import { app, shell, BrowserWindow, ipcMain, nativeTheme } from 'electron'
+import { readFile } from 'node:fs/promises'
+import { app, shell, BrowserWindow, ipcMain, nativeTheme, protocol, net } from 'electron'
+
+import { registerIpc } from './ipc'
+import { listInstances } from './lib/instances'
+
+/**
+ * Eigenes Protokoll für Instanz-Profilbilder.
+ *
+ * Die Bilder liegen im Instanzordner, also außerhalb der App. `file://` wäre dafür
+ * entweder blockiert oder müsste die CSP weit öffnen. Stattdessen liefert
+ * `kcicon://<instanz-id>` genau das Bild dieser einen Instanz — mehr kann das
+ * Protokoll nicht, es nimmt keinen freien Pfad entgegen.
+ */
+protocol.registerSchemesAsPrivileged([
+  { scheme: 'kcicon', privileges: { standard: true, secure: true, supportFetchAPI: true } }
+])
+
+function registerIconProtocol(): void {
+  protocol.handle('kcicon', async (request) => {
+    const id = new URL(request.url).hostname
+    const instances = await listInstances()
+    const instance = instances.find((i) => i.id === id)
+    if (!instance?.icon) return new Response(null, { status: 404 })
+    try {
+      const data = await readFile(join(instance.dir, '.kiritclient', instance.icon))
+      return new Response(new Uint8Array(data))
+    } catch {
+      return new Response(null, { status: 404 })
+    }
+  })
+  void net // net wird von protocol.handle intern benötigt; Import hält die API stabil
+}
 
 /**
  * Standard-Speicherort für Instanzen (Owner-Entscheidung 2026-07-27):
@@ -111,7 +143,9 @@ if (!gotLock) {
     app.setAppUserModelId('dev.imkirit.kiritclient')
     nativeTheme.themeSource = 'dark'
 
+    registerIconProtocol()
     registerWindowControls()
+    registerIpc()
     createWindow()
 
     app.on('activate', () => {

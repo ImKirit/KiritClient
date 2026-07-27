@@ -1,18 +1,19 @@
 {
-  "app": {
-    "name": "KiritClient"
-  },
+  "app": { "name": "KiritClient" },
+
   "titlebar": {
     "minimize": "Minimize",
     "maximize": "Maximize",
     "restore": "Restore",
     "close": "Close"
   },
+
   "nav": {
     "instances": "Instances",
     "cosmetics": "Cosmetics",
     "settings": "Settings"
   },
+
   "account": {
     "signedOut": "Not signed in",
     "signIn": "Sign in",
@@ -20,32 +21,110 @@
     "manage": "Manage accounts",
     "add": "Add account"
   },
+
   "instances": {
     "title": "Instances",
     "subtitle": "Your Minecraft versions and modpacks",
     "create": "New instance",
-    "empty": "No instances yet"
+    "empty": "No instances yet",
+    "noMatch": "Nothing matches your search",
+    "search": "Search instances…",
+    "searchVersion": "Search versions…",
+    "showSnapshots": "Show snapshots and old versions",
+    "latest": "Latest",
+    "filter": "Filter",
+    "loaderFilter": "Loader",
+    "kcOnly": "KiritClient only",
+    "viewGrid": "Grid view",
+    "viewList": "List view",
+    "name": "Name",
+    "image": "Image",
+    "chooseImage": "Choose image",
+    "imageHint": "Optional. Without one, an image is generated from the name.",
+    "kiritClientHint": "Adds the KiritClient in-game features to this instance.",
+    "neverPlayed": "Never played",
+    "play": "Play",
+    "notFound": "This instance no longer exists.",
+    "openFolder": "Open folder",
+    "move": "Move to another folder",
+    "delete": "Delete instance",
+    "deleteConfirm": "Delete \"{{name}}\"?",
+    "deleteFiles": "Also delete the instance folder",
+    "deleteTrashHint": "The folder goes to the recycle bin, not deleted permanently.",
+    "dangerZone": "Danger zone",
+    "gameSettings": "Game settings",
+    "gameSettingsHint": "These apply to this instance only. Leave empty to use the defaults.",
+    "ram": "Memory (MB)",
+    "resolution": "Resolution",
+    "javaArgs": "Java arguments",
+    "location": "Location",
+    "version": "Version",
+    "loaderLabel": "Loader",
+    "playtime": "Playtime",
+    "lastPlayedLabel": "Last played",
+    "created": "Created",
+    "folder": "Folder"
   },
-  "cosmetics": {
-    "title": "Cosmetics",
-    "subtitle": "Capes and skins"
+
+  "loader": {
+    "vanilla": "Vanilla",
+    "vanillaHint": "Minecraft as shipped, no mod loader.",
+    "fabric": "Fabric",
+    "fabricHint": "Required for mods like Sodium and Iris."
   },
+
+  "wizard": {
+    "version": "Version",
+    "loader": "Loader",
+    "name": "Name & image"
+  },
+
+  "sort": {
+    "lastPlayed": "Last played",
+    "name": "Name",
+    "version": "Version",
+    "playtime": "Playtime"
+  },
+
+  "tabs": {
+    "overview": "Overview",
+    "mods": "Mods",
+    "resourcepacks": "Resource packs",
+    "shaders": "Shaders",
+    "settings": "Settings"
+  },
+
   "settings": {
     "title": "Settings",
     "subtitle": "Configure KiritClient",
     "language": "Language",
-    "languageHint": "Interface language. Restart is not required.",
+    "languageHint": "Interface language. No restart needed.",
     "instanceLocation": "Instance location",
-    "instanceLocationHint": "Where new instances are stored by default."
+    "instanceLocationHint": "Where new instances are stored by default.",
+    "instanceLocationNote": "Existing instances stay where they are. Move them individually from their settings.",
+    "defaults": "Defaults for new instances",
+    "defaultsHint": "Each instance can override these.",
+    "versions": "Versions",
+    "snapshotsHint": "Off by default so the version list stays short."
   },
+
   "update": {
     "available": "Version {{version}} is available",
     "download": "Update now",
     "dismiss": "Later"
   },
+
   "common": {
     "notBuiltYet": "Not built yet",
-    "notBuiltYetHint": "This area is part of the foundation and has no functionality yet. It will be built feature by feature.",
-    "kiritclient": "KiritClient"
+    "notBuiltYetHint": "This area has no functionality yet. It will be built feature by feature.",
+    "kiritclient": "KiritClient",
+    "back": "Back",
+    "next": "Next",
+    "create": "Create",
+    "cancel": "Cancel",
+    "all": "All",
+    "reset": "Reset",
+    "loading": "Loading…",
+    "change": "Change"
   }
 }
